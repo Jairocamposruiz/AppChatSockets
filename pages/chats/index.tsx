@@ -1,3 +1,4 @@
+import { Chat } from '@components/chat/Chat';
 import { ListChat } from '@components/chat/ListChat';
 import { ContainerScreen } from '@components/layout/ContainerScreen';
 import type { NextPage } from 'next';
@@ -13,6 +14,10 @@ const ChatsPage: NextPage = () => {
 
       <ContainerScreen>
         <ListChat title={'Chats públicos'} />
+
+        <Chat
+          name={'Nombre del chat seleccionado'}
+        />
       </ContainerScreen>
     </div>
   );

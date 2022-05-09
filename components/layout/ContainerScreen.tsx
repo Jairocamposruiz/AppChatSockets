@@ -10,7 +10,7 @@ export const ContainerScreen = ({ className, children }: Props) => {
     <main
       className={ `w-full h-full overflow-hidden grid ${ className }` }
     >
-      <div className="w-screen h-full h-9/10">
+      <div className="w-screen flex h-full h-content">
         { children }
       </div>
     </main>

@@ -7,6 +7,9 @@ export const theme = {
   bgFooter: 'bg-slate-200',
   bgActive: 'bg-blue-600',
 
+  incomingMessage: 'bg-blue-200',
+  outgoingMessage: 'bg-green-200',
+  input: 'bg-slate-200 outline-blue-600 caret-blue-600',
   buttonPrimary: 'bg-blue-200 hover:bg-blue-300 active:bg-blue-400',
 
   navLink: 'bg-slate-200 hover:bg-blue-200 text-gray-700 hover:text-gray-900',

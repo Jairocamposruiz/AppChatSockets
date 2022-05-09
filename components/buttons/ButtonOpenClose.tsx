@@ -13,7 +13,7 @@ export const ButtonOpenClose = ({ className, isOpen, onClick }: Props) => {
   return (
     <button
       onClick={onClick}
-      className={ `px-4 ${theme.buttonPrimary} ${ className }` }
+      className={ `px-4 items-center ${theme.buttonPrimary} ${ className }` }
     >
       <Icon
         className="h-8"

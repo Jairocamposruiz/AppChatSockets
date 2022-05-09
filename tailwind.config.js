@@ -8,7 +8,11 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        "9/10": "90vh"
+        "navbar": "4rem",
+        "content": "calc(100vh - 4rem)",
+      },
+      width: {
+        "message": "90%",
       }
     },
   },

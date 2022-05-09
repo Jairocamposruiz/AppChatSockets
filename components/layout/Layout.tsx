@@ -15,12 +15,12 @@ export const Layout = ({ className, children }: Props) => {
       className={ `flex w-full flex-col min-h-screen max-w-screen overflow-y-hidden justify-between ${theme.bgPage} ${ className }` }
     >
       <Navbar />
-        <div
-          className={ `flex-1 flex` }
-        >
-          { children }
-        </div>
-      <Footer />
+      <div
+        className={ `flex-1 flex` }
+      >
+        { children }
+      </div>
+      {/*<Footer />*/}
     </div>
   );
 };

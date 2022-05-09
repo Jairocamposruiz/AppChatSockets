@@ -58,7 +58,7 @@ export const ListChat = ({ className, title }: Props) => {
       </div>
 
       <ButtonOpenClose
-        className={`h-20`}
+        className={`h-20 absolute ${(isOpen) ? 'hidden' : 'flex'}`}
         onClick={ handleOpenClose }
         isOpen={isOpen}
       />

@@ -8,8 +8,6 @@ interface Props {
   className?: string;
   icon: keyof IconDictionary;
   onClick?: MouseEventHandler<SVGSVGElement>;
-  width?: string | number | undefined;
-  height?: string | number | undefined;
 }
 
 const icons: IconDictionary = {
@@ -24,15 +22,13 @@ const icons: IconDictionary = {
   arrowRight: faAngleRight,
 };
 
-export const Icon = ({ className, icon, onClick, width, height }: Props) => {
+export const Icon = ({ className, icon, onClick }: Props) => {
 
   return (
     <FontAwesomeIcon
       onClick={ onClick }
       className={ `${ className }` }
       icon={ icons[icon] }
-      width={width}
-      height={height}
     />
   );
 };

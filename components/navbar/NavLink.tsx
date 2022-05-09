@@ -23,7 +23,7 @@ export const NavLink = ({ children, exact = false, href }: Props) => {
           <div
             className={ `
               ${ (isActive) ? theme.navLinkActive : theme.navLink } 
-              z-10 px-6 md:w-40 duration-300 transition h-14 flex items-center justify-center font-bold
+              z-10 h-navbar px-6 md:w-40 duration-300 transition h-14 flex items-center justify-center font-bold
             ` }
           >
             { children }
@@ -31,7 +31,7 @@ export const NavLink = ({ children, exact = false, href }: Props) => {
           {
             (isActive) && (
               <div
-                className={ `${ (isActive) ? theme.navLinkActive : theme.navLink } w-4 h-4 absolute top-12 rotate-45` }
+                className={ `${ (isActive) ? theme.navLinkActive : theme.navLink } w-4 h-4 absolute top-1 rotate-45` }
               />
             )
           }

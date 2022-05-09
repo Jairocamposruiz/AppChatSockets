@@ -1,3 +1,6 @@
+import { Chat } from '@components/chat/Chat';
+import { ListChat } from '@components/chat/ListChat';
+import { ContainerScreen } from '@components/layout/ContainerScreen';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -9,7 +12,13 @@ const UsersPage: NextPage = () => {
         <meta name="description" content="Descripción de la página" />
       </Head>
 
-      <h1>/index component:UsersPage</h1>
+      <ContainerScreen>
+        <ListChat title={'Chats privados'} />
+
+        <Chat
+          name={'Fulanito de tal'}
+        />
+      </ContainerScreen>
     </div>
   );
 };
