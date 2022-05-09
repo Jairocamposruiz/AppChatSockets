@@ -21,4 +21,3 @@ const Home: NextPage = () => {
 
 export default Home;
 
-// <Image src="/vercel.svg" alt="Vercel Logo" width={2000} height={2000} />

@@ -1,8 +1,18 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps, NextWebVitalsMetric } from 'next/app';
+import { Layout } from '../components/layout/Layout';
+
+export const reportWebVitals = (metric: NextWebVitalsMetric) => {
+  console.log(metric);
+  //Report to analytics
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
 }
 
 export default MyApp
