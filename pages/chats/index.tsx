@@ -1,5 +1,5 @@
-import { Container } from '@components/layout/Container';
-import { Title } from '@components/text/Title';
+import { ListChat } from '@components/chat/ListChat';
+import { ContainerScreen } from '@components/layout/ContainerScreen';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -11,9 +11,9 @@ const ChatsPage: NextPage = () => {
         <meta name="description" content="Descripción de la página" />
       </Head>
 
-      <Container>
-        <Title label={'Chats'} />
-      </Container>
+      <ContainerScreen>
+        <ListChat title={'Chats públicos'} />
+      </ContainerScreen>
     </div>
   );
 };

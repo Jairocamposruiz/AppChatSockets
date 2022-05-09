@@ -33,7 +33,7 @@ export const Navbar = ({ className }: Props) => {
     >
       <div>
         <NavLink exact href="/">
-          <Image src="/logo.svg" alt="Vercel Logo" width={ 40 } height={ 40 } />
+          <Image src="/logo.svg" alt="JCodeR Logo" width={ 40 } height={ 40 } />
           <h3 className={ `ml-3 hidden md:flex ` }>JChat</h3>
         </NavLink>
       </div>
@@ -42,7 +42,7 @@ export const Navbar = ({ className }: Props) => {
           <NavLink exact href={ href } key={ href }>
             <Icon
               icon={ icon }
-              className={ `text-xl` }
+              width={ '2rem' }
             />
             <h3 className={ `ml-3 hidden md:flex ` }>{ label }</h3>
           </NavLink>

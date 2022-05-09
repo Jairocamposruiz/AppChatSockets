@@ -1,16 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faSun, faMessage, faUser, faComments, faUsers, faGear, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun, faMessage, faUser, faComments, faUsers, faGear, faAngleLeft, faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MouseEventHandler } from 'react';
 
-type Icon = Record<string, IconDefinition>;
+type IconDictionary = Record<string, IconDefinition>;
 
 interface Props {
   className?: string;
-  icon: keyof Icon;
+  icon: keyof IconDictionary;
   onClick?: MouseEventHandler<SVGSVGElement>;
+  width?: string | number | undefined;
+  height?: string | number | undefined;
 }
 
-const icons: Icon = {
+const icons: IconDictionary = {
   moon: faMoon,
   sun: faSun,
   message: faMessage,
@@ -18,15 +20,19 @@ const icons: Icon = {
   users: faUsers,
   chat: faComments,
   settings: faGear,
+  arrowLeft: faAngleLeft,
+  arrowRight: faAngleRight,
 };
 
-export const Icon = ({ className, icon, onClick }: Props) => {
+export const Icon = ({ className, icon, onClick, width, height }: Props) => {
 
   return (
     <FontAwesomeIcon
       onClick={ onClick }
       className={ `${ className }` }
       icon={ icons[icon] }
+      width={width}
+      height={height}
     />
   );
 };

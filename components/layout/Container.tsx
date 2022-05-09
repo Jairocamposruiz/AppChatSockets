@@ -10,7 +10,7 @@ export const Container = ({ className, children }: Props) => {
     <main
       className={ `w-full overflow-hidden grid place-content-center ${ className }` }
     >
-      <div className="grid place-content-center max-w-7xl">
+      <div className="grid place-content-center max-w-7xl pt-8">
         { children }
       </div>
     </main>

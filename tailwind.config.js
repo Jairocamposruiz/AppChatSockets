@@ -6,7 +6,11 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        "9/10": "90vh"
+      }
+    },
   },
   plugins: [],
 }

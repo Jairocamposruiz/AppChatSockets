@@ -12,10 +12,14 @@ interface Props {
 export const Layout = ({ className, children }: Props) => {
   return (
     <div
-      className={ `flex flex-col min-h-screen justify-between ${theme.bgPage} ${ className }` }
+      className={ `flex w-full flex-col min-h-screen max-w-screen overflow-y-hidden justify-between ${theme.bgPage} ${ className }` }
     >
       <Navbar />
-        { children }
+        <div
+          className={ `flex-1 flex` }
+        >
+          { children }
+        </div>
       <Footer />
     </div>
   );
