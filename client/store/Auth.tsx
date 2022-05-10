@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [authState, dispatch] = useReducer(authReducer, initialState);
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    const resp = await fetchWithoutToken<LoginResponse>('login', { email, password }, 'POST');
+    const resp = await fetchWithoutToken<LoginResponse>('/auth/login', { email, password }, 'POST');
     if (resp?.ok) {
       const { user, token } = resp;
       localStorage.setItem('token', token);
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
-    const resp = await fetchWithoutToken<RegisterResponse>('login/new', { email, password, name }, 'POST');
+    const resp = await fetchWithoutToken<RegisterResponse>('auth/new', { email, password, name }, 'POST');
     if (resp?.ok) {
       const { user, token } = resp;
       localStorage.setItem('token', token);
@@ -99,7 +99,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       return false;
     }
 
-    const resp = await fetchWithToken<RevalidateTokenResponse>('login/renew', {}, 'GET');
+    const resp = await fetchWithToken<RevalidateTokenResponse>('auth/renew', {}, 'GET');
     if (resp?.ok) {
       const { user, token } = resp;
       localStorage.setItem('token', token);

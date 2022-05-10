@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import { Layout } from '@components/layout/Layout';
 import { AuthProvider } from '@store/Auth';
 import { ChatProvider } from '@store/Chat';
+import { SocketProvider } from '@store/Socket';
 
 export const reportWebVitals = (metric: NextWebVitalsMetric) => {
   console.log(metric);
@@ -14,9 +15,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChatProvider>
       <AuthProvider>
-        <Layout>
-          <Component { ...pageProps } />
-        </Layout>
+        <SocketProvider>
+          <Layout>
+            <Component { ...pageProps } />
+          </Layout>
+        </SocketProvider>
       </AuthProvider>
     </ChatProvider>
   );
