@@ -29,7 +29,7 @@ const links = [
 export const Navbar = ({ className }: Props) => {
   return (
     <nav
-      className={ `flex w-full justify-between items-center h-navbar ${ theme.bgNavbar } ${ className }` }
+      className={ `flex w-full justify-between items-center  ${ theme.bgNavbar } ${ className }` }
     >
       <div>
         <NavLink exact href="/">
@@ -42,7 +42,7 @@ export const Navbar = ({ className }: Props) => {
           <NavLink exact href={ href } key={ href }>
             <Icon
               icon={ icon }
-              className={`text-2xl`}
+              className={`w-8 h-8 `}
             />
             <h3 className={ `ml-3 hidden md:flex ` }>{ label }</h3>
           </NavLink>

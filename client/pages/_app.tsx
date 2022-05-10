@@ -1,6 +1,9 @@
-import '../styles/globals.css'
 import type { AppProps, NextWebVitalsMetric } from 'next/app';
-import { Layout } from '../components/layout/Layout';
+
+import '../styles/globals.css';
+import { Layout } from '@components/layout/Layout';
+import { AuthProvider } from '@store/Auth';
+import { ChatProvider } from '@store/Chat';
 
 export const reportWebVitals = (metric: NextWebVitalsMetric) => {
   console.log(metric);
@@ -9,10 +12,14 @@ export const reportWebVitals = (metric: NextWebVitalsMetric) => {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  )
+    <ChatProvider>
+      <AuthProvider>
+        <Layout>
+          <Component { ...pageProps } />
+        </Layout>
+      </AuthProvider>
+    </ChatProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

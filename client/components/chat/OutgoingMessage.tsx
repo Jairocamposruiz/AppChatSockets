@@ -3,7 +3,7 @@ import { theme } from '@theme';
 interface Props {
   className?: string;
   message: string;
-  date: Date;
+  date: string;
 }
 
 export const OutgoingMessage = ({ className, message, date }: Props) => {

@@ -18,6 +18,10 @@
     "paths": {
       "@components/*": ["components/*"],
       "@theme": ["styles/theme.ts"],
+      "@store/*": ["store/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@helpers/*": ["helpers/*"],
+      "@hooks/*": ["hooks/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
