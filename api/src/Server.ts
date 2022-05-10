@@ -7,6 +7,7 @@ import cors from 'cors';
 import { config } from './config';
 import { dbConnection } from './database/config';
 import Sockets from './Sockets';
+import authController from './controllers/auth';
 
 class Server {
   app: Express;
@@ -30,6 +31,9 @@ class Server {
 
     //Middlewares
     this.middlewares();
+
+    //Routes
+    this.routes();
   }
 
   private middlewares() {
@@ -38,10 +42,14 @@ class Server {
     this.app.use(express.json());
   }
 
+  private routes() {
+    this.app.use('/api/v1/auth', authController);
+  }
+
   public listen() {
     this.httpServer.listen(this.port, () => {
-      console.log(`App is running in http://localhost:${this.port}`);
-    })
+      console.log(`App is running in http://localhost:${ this.port }`);
+    });
   }
 }
 
