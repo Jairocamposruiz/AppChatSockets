@@ -4,7 +4,7 @@ export const useForm = <T extends { [key: string]: any }>(initialState: T) => {
 
   const [form, setForm] = useState(initialState);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value, name } = event.target;
 
     setForm((form) => ({

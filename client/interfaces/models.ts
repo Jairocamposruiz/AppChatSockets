@@ -13,3 +13,9 @@ export interface User {
   online: boolean;
   uid: string;
 }
+
+export interface Chat {
+  name: string;
+  uid: string;
+  online: boolean;
+}

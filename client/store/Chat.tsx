@@ -1,17 +1,17 @@
 import { createContext, ReactNode, useCallback, useReducer } from 'react';
 
-import { Message, User } from '@interfaces/models';
+import { Chat, Message, User } from '@interfaces/models';
 
 interface ChatState {
   uid: string;
-  activeChat: string | null;
+  activeChat: Chat | null;
   users: User[],
   messages: Message[],
 }
 
 type ChatAction =
   | { type: 'load-users', payload: User[] }
-  | { type: 'active-chat', payload: string }
+  | { type: 'active-chat', payload: Chat }
   | { type: 'new-message', payload: Message }
   | { type: 'add-messages', payload: Message[] }
   | { type: 'clean' }
@@ -31,7 +31,7 @@ const chatReducer = (state: ChatState, action: ChatAction): ChatState => {
         messages: [],
       };
     case 'new-message':
-      if (state.activeChat === action.payload.from || state.activeChat === action.payload.to) {
+      if (state.activeChat?.uid === action.payload.from || state.activeChat?.uid === action.payload.to) {
         return {
           ...state,
           messages: [...state.messages, action.payload],
@@ -59,7 +59,7 @@ const chatReducer = (state: ChatState, action: ChatAction): ChatState => {
 interface ChatContextProps {
   chatState: ChatState;
   loadUsers: (users: User[]) => void;
-  activeChat: (uid: string) => void;
+  activeChat: (chat: Chat) => void;
   newMessage: (message: Message) => void;
   addMessages: (messages: Message[]) => void;
   clean: () => void;
@@ -86,8 +86,8 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     dispatch({ type: 'load-users', payload: users });
   };
 
-  const activeChat = (uid: string) => {
-    dispatch({ type: 'active-chat', payload: uid });
+  const activeChat = (chat: Chat) => {
+    dispatch({ type: 'active-chat', payload: chat });
   };
 
   const newMessage = useCallback((message: Message) => {

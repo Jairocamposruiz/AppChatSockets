@@ -1,10 +1,21 @@
-import { Chat } from '@components/chat/Chat';
-import { ListChat } from '@components/chat/ListChat';
-import { ContainerScreen } from '@components/layout/ContainerScreen';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useContext } from 'react';
+
+import { Chat } from '@components/chat/Chat';
+import { ChatUnselect } from '@components/chat/ChatUnselect';
+import { ListChat } from '@components/chat/ListChat';
+import { ContainerScreen } from '@components/layout/ContainerScreen';
+import { AuthContext } from '@store/Auth';
+import { ChatContext } from '@store/Chat';
 
 const UsersPage: NextPage = () => {
+  const { chatState } = useContext(ChatContext);
+  const { uid } = useContext(AuthContext);
+  const users = chatState.users.filter((user) => {
+    return user.uid !== uid;
+  })
+
   return (
     <div>
       <Head>
@@ -13,11 +24,12 @@ const UsersPage: NextPage = () => {
       </Head>
 
       <ContainerScreen>
-        <ListChat title={'Chats privados'} />
+        <ListChat title={'Chats privados'} chats={users} />
 
-        <Chat
-          name={'Fulanito de tal'}
-        />
+        { (chatState.activeChat)
+          ? <Chat name={ chatState.activeChat.name } />
+          : <ChatUnselect />
+        }
       </ContainerScreen>
     </div>
   );

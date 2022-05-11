@@ -22,4 +22,5 @@ export const theme = {
   navLinkActive: 'duration-300 transition bg-blue-300 text-gray-700 hover:text-gray-900',
 
   chatListItem: 'bg-slate-100 hover:bg-slate-200 active:bg-slate-300',
+  chatListItemActive: 'bg-blue-200 hover:bg-blue-200',
 };
