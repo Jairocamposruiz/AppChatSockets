@@ -1,7 +1,9 @@
 import { ButtonOpenClose } from '@components/buttons/ButtonOpenClose';
 import { ListChatItem } from '@components/chat/ListChatItem';
 import { Title } from '@components/text/Title';
-import { useState } from 'react';
+import { AuthContext } from '@store/Auth';
+import { ChatContext } from '@store/Chat';
+import { useContext, useState } from 'react';
 
 interface Props {
   className?: string;
@@ -11,6 +13,10 @@ interface Props {
 export const ListChat = ({ className, title }: Props) => {
   const [isOpen, setIsOpen] = useState(true);
   const handleOpenClose = () => setIsOpen(!isOpen);
+
+  const { chatState } = useContext(ChatContext);
+  const { uid } = useContext(AuthContext);
+  const chats = chatState
 
   return (
     <>

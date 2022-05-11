@@ -1,5 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faSun, faMessage, faUser, faComments, faUsers, faGear, faAngleLeft, faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMoon,
+  faSun,
+  faMessage,
+  faUser,
+  faComments,
+  faUsers,
+  faGear,
+  faAngleLeft,
+  faAngleRight,
+  faArrowRightFromBracket,
+  IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
 import { MouseEventHandler } from 'react';
 
 type IconDictionary = Record<string, IconDefinition>;
@@ -20,6 +32,7 @@ const icons: IconDictionary = {
   settings: faGear,
   arrowLeft: faAngleLeft,
   arrowRight: faAngleRight,
+  logout: faArrowRightFromBracket,
 };
 
 export const Icon = ({ className, icon, onClick }: Props) => {

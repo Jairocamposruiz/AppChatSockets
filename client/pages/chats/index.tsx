@@ -1,10 +1,15 @@
 import { Chat } from '@components/chat/Chat';
+import { ChatUnselect } from '@components/chat/ChatUnselect';
 import { ListChat } from '@components/chat/ListChat';
 import { ContainerScreen } from '@components/layout/ContainerScreen';
+import { ChatContext } from '@store/Chat';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useContext } from 'react';
 
 const ChatsPage: NextPage = () => {
+  const { chatState } = useContext(ChatContext);
+
   return (
     <div>
       <Head>
@@ -15,9 +20,11 @@ const ChatsPage: NextPage = () => {
       <ContainerScreen>
         <ListChat title={'Chats públicos'} />
 
-        <Chat
-          name={'Nombre del chat seleccionado'}
-        />
+        {(chatState.activeChat)
+          ? <Chat name={'Nombre del chat seleccionado'} />
+          : <ChatUnselect />
+        }
+
       </ContainerScreen>
     </div>
   );

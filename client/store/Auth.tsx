@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [authState, dispatch] = useReducer(authReducer, initialState);
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    const resp = await fetchWithoutToken<LoginResponse>('/auth/login', { email, password }, 'POST');
+    const resp = await fetchWithoutToken<LoginResponse>('auth/login', { email, password }, 'POST');
     if (resp?.ok) {
       const { user, token } = resp;
       localStorage.setItem('token', token);

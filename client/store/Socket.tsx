@@ -17,9 +17,15 @@ interface SocketProviderProps {
 
 export const SocketContext = createContext<SocketContextProps>({} as SocketContextProps);
 
+const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL;
+
+if (!socketUrl) {
+  throw new Error('⚠️ The variable of environment NEXT_PUBLIC_SOCKET_URL is required ⚠️');
+}
+
 export const SocketProvider = ({ children }: SocketProviderProps) => {
 
-  const { socket, online, connectSocket, disconnectSocket } = useSocket('http://localhost:3001');
+  const { socket, online, connectSocket, disconnectSocket } = useSocket(socketUrl);
   const { logged } = useContext(AuthContext);
   const { loadUsers, newMessage } = useContext(ChatContext);
 

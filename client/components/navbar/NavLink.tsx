@@ -23,7 +23,7 @@ export const NavLink = ({ children, exact = false, href }: Props) => {
           <div
             className={ `
               ${ (isActive) ? theme.navLinkActive : theme.navLink } 
-              z-10 px-6 md:w-40 duration-300 transition h-14 flex items-center justify-center font-bold
+              z-10 px-6 md:w-40 h-14 flex items-center justify-center font-bold
             ` }
           >
             { children }
