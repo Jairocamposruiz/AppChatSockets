@@ -1,5 +1,8 @@
 export interface Message {
-  from: string;
+  from: {
+    uid: string,
+    name: string,
+  };
   to: string;
   message: string;
   createdAt: string;

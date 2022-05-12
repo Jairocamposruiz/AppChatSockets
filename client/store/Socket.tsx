@@ -62,13 +62,7 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
 
   useEffect(() => {
     socket?.on('public-message', (message) => {
-      const { _id, chat, ...rest } = message;
-      const parseMessage = {
-        ...rest,
-        uid: _id,
-        to: chat,
-      };
-      newPublicMessage(parseMessage);
+      newPublicMessage(message);
       scrollToBottomAnimated('messages');
     });
   }, [socket, newPublicMessage]);

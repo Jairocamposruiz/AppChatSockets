@@ -23,16 +23,15 @@ export const Messages = ({ className, isPublic }: Props) => {
     >
       {
         messagesToShow.map((msg) => (
-          (msg.from === uid)
+          (msg.from.uid === uid)
             ? (<OutgoingMessage
               key={ msg._id }
-              message={ msg.message }
+              message={ msg }
               date={ new Date(msg.createdAt) }
             />)
             : (<IncomingMessage
               key={ msg._id }
-              message={ msg.message }
-              user={ chatState.activeChat?.name || '' }
+              message={ msg }
               date={ new Date(msg.createdAt) }
             />)
         ))

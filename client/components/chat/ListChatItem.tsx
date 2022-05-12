@@ -53,11 +53,15 @@ export const ListChatItem = ({ className, chat, isPublic }: Props) => {
         >
           { name }
         </p>
-        <p
-          className={ `mt-1 ${ online ? 'text-green-500 dark:text-green-300' : 'text-red-500 dark:text-red-400' } text-lg` }
-        >
-          { online ? 'Online' : 'Offline' }
-        </p>
+        {
+          (!isPublic) && (
+            <p
+              className={ `mt-1 ${ online ? 'text-green-500 dark:text-green-300' : 'text-red-500 dark:text-red-400' } text-lg` }
+            >
+              { online ? 'Online' : 'Offline' }
+            </p>
+          )
+        }
       </div>
     </div>
   );

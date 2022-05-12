@@ -51,7 +51,7 @@ class Sockets {
         const message = await saveMessage(payload);
         if (!message) return;
         this.io.to(payload.to).emit('private-message', message);
-        this.io.to(payload.from).emit('private-message', message);
+        this.io.to(payload.from.uid).emit('private-message', message);
       });
 
       //Public Chats
@@ -59,14 +59,12 @@ class Sockets {
       this.io.emit('chats-list', await getChats());
 
       socket.on('create-chat', async (payload) => {
-        console.log(payload)
         const chat = await createChat(payload);
         if (!chat) return;
         this.io.emit('chats-list', await getChats());
       });
 
       socket.on('join-chat', async (payload) => {
-        console.log("sala:" + payload)
         socket.join(payload);
       });
 

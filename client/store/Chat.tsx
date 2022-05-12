@@ -50,7 +50,7 @@ const chatReducer = (state: ChatState, action: ChatAction): ChatState => {
         publicMessages: [],
       };
     case 'new-message':
-      if (state.activeChat?.uid === action.payload.from || state.activeChat?.uid === action.payload.to) {
+      if (state.activeChat?.uid === action.payload.from.uid || state.activeChat?.uid === action.payload.to || true) {
         return {
           ...state,
           messages: [...state.messages, action.payload],
@@ -59,7 +59,7 @@ const chatReducer = (state: ChatState, action: ChatAction): ChatState => {
         return state;
       }
     case 'new-public-message':
-      if (state.publicActiveChat?.uid === action.payload.from || state.publicActiveChat?.uid === action.payload.to) {
+      if (state.publicActiveChat?.uid === action.payload.from.uid || state.publicActiveChat?.uid === action.payload.to) {
         return {
           ...state,
           publicMessages: [...state.publicMessages, action.payload],
@@ -142,6 +142,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   };
 
   const newMessage = useCallback((message: Message) => {
+    console.log('asdfasdfasdfasdfasdf')
     dispatch({ type: 'new-message', payload: message });
   }, []);
 

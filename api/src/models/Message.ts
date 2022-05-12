@@ -14,9 +14,5 @@ const MessageSchema = new Schema<Message>({
   timestamps: true
 })
 
-MessageSchema.method('toJSON', function () {
-  const { __v, ...rest } = this.toObject();
-  return rest;
-})
 
 export default model<Message>('Message', MessageSchema);

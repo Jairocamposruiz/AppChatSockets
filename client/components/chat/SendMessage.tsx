@@ -15,7 +15,7 @@ export const SendMessage = ({ className, isPublic }: Props) => {
   const { message, onChange, setFormValues } = useForm({
     message: '',
   });
-  const { uid } = useContext(AuthContext);
+  const { uid, name } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
   const { chatState } = useContext(ChatContext);
 
@@ -29,13 +29,13 @@ export const SendMessage = ({ className, isPublic }: Props) => {
 
     if(isPublic) {
       socket?.emit('public-message', {
-        from: uid,
+        from: { name, uid },
         chat: chatState.publicActiveChat?.uid,
         message,
       });
     } else {
       socket?.emit('private-message', {
-        from: uid,
+        from: { name, uid },
         to: chatState.activeChat?.uid,
         message,
       });

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useCallback, useReducer } from 'react';
+import { createContext, ReactNode, useCallback, useEffect, useReducer } from 'react';
 
 import { User } from '@interfaces/models';
 import { LoginResponse, RegisterResponse, RevalidateTokenResponse } from '@interfaces/responses';
@@ -94,6 +94,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const verifyToken = useCallback(async (): Promise<boolean> => {
     const token = localStorage.getItem('token');
+
     if (!token) {
       dispatch({ type: 'logout', payload: null });
       return false;
