@@ -41,7 +41,7 @@ export const Footer = ({ className }: Props) => {
         </p>
         <p>
           <a
-            href="https://blog.jcoder.es"
+            href="https://github.com/Jairocamposruiz/AppChatSockets.git"
             target="_blank"
             className={ `text-blue-500` }
           >Repositorio en GitHub</a>

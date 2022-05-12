@@ -14,6 +14,7 @@ interface Link {
   href: string;
   label: string;
   icon: string;
+  isNeededLogin: boolean,
 }
 
 const listOfLinks: Link[] = [
@@ -21,21 +22,25 @@ const listOfLinks: Link[] = [
     href: '/chats',
     label: 'Chats',
     icon: 'chat',
+    isNeededLogin: true,
   },
   {
     href: '/users',
     label: 'Usuarios',
     icon: 'users',
+    isNeededLogin: true,
   },
   {
     href: '/settings',
     label: 'Ajustes',
     icon: 'settings',
+    isNeededLogin: true,
   },
   {
     href: '/auth/login',
     label: 'Login',
     icon: 'user',
+    isNeededLogin: false,
   },
 ];
 
@@ -49,7 +54,8 @@ export const Navbar = ({ className }: Props) => {
       const filteredLinks = listOfLinks!.filter((link) => link.href !== '/auth/login');
       setLinks(filteredLinks);
     } else {
-      setLinks(listOfLinks);
+      const filteredLinks = listOfLinks!.filter((link) => !link.isNeededLogin);
+      setLinks(filteredLinks);
     }
   }, [logged]);
 

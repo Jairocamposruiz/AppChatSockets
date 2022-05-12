@@ -1,5 +1,6 @@
 import { AuthContext } from '@store/Auth';
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -10,11 +11,17 @@ import { ContainerScreen } from '@components/layout/ContainerScreen';
 import { ChatContext } from '@store/Chat';
 
 const ChatsPage: NextPage = () => {
+  const router = useRouter();
   const { chatState } = useContext(ChatContext);
-  const { uid } = useContext(AuthContext);
-  const users = chatState.users.filter((user) => {
-    return user.uid !== uid;
-  });
+  const { logged } = useContext(AuthContext);
+
+  const chats = chatState.chats;
+
+  useEffect(() => {
+    if(!logged) {
+      router.push('/auth/login')
+    }
+  }, [logged])
 
   return (
     <div>
@@ -24,10 +31,10 @@ const ChatsPage: NextPage = () => {
       </Head>
 
       <ContainerScreen>
-        <ListChat title={ 'Chats públicos' } chats={ users } />
+        <ListChat isPublic title={ 'Chats públicos' } chats={ chats } />
 
-        { (chatState.activeChat)
-          ? <Chat name={ chatState.activeChat.name } />
+        { (chatState.publicActiveChat)
+          ? <Chat isPublic name={ chatState.publicActiveChat.name } />
           : <ChatUnselect />
         }
 

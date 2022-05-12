@@ -1,7 +1,6 @@
 import Message from '../models/Message';
 
 export const getMessagesByUser = async (idUser: string, messagesFrom: string) => {
-
   const messages = await Message.find({
     $or: [
       { from: idUser, to: messagesFrom },
@@ -13,7 +12,7 @@ export const getMessagesByUser = async (idUser: string, messagesFrom: string) =>
   return messages;
 };
 
-export const saveMessage = async (message: { from: string, to: string, message: string } ) => {
+export const saveMessage = async (message: { from: string, to: string, message: string }) => {
   try {
     const newMessage = new Message(message);
     await newMessage.save();
@@ -23,4 +22,4 @@ export const saveMessage = async (message: { from: string, to: string, message: 
     console.log(error);
     return false;
   }
-}
+};

@@ -1,6 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useContext } from 'react';
 
+import { AuthContext } from '@store/Auth';
 import { Text } from '@components/text/Text';
 import { Title } from '@components/text/Title';
 import { theme } from '@theme';
@@ -8,6 +10,8 @@ import { theme } from '@theme';
 import { Container } from '@components/layout/Container';
 
 const Home: NextPage = () => {
+  const { logged } = useContext(AuthContext);
+
   return (
     <div>
       <Head>
@@ -36,10 +40,16 @@ const Home: NextPage = () => {
           comunidad de manera privada.
         </Text>
 
-        <Text>
-          Para poder leer o escribir comentarios es necesario crearse una cuenta, para lo cual solo se pedirá el nombre
-          que se quiere mostrar y una contraseña.
-        </Text>
+        {
+          (!logged) && (
+            <Text
+              className={ `bg-yellow-100 dark:bg-sky-800 p-4 rounded-lg` }
+            >
+              Para poder leer o escribir comentarios es necesario crearse una cuenta e iniciar sesión, para lo cual solo
+              se pedirá el nombre que se quiere mostrar y una contraseña.
+            </Text>
+          )
+        }
       </Container>
     </div>
   );

@@ -4,12 +4,13 @@ import { theme } from '@theme';
 
 interface Props {
   className?: string;
+  isPublic?: boolean;
   name: string;
 }
 
 //TODO: Ocultar chat en tamaño sm si está abierta la lista
 
-export const Chat = ({ className, name }: Props) => {
+export const Chat = ({ className, name, isPublic = false }: Props) => {
   return (
     <div
       className={ `flex flex-col flex-1 ${ className }` }
@@ -21,10 +22,13 @@ export const Chat = ({ className, name }: Props) => {
       </h2>
 
       <Messages
+        isPublic={isPublic}
         className={`flex-1`}
       />
 
-      <SendMessage />
+      <SendMessage
+        isPublic={isPublic}
+      />
     </div>
   );
 };

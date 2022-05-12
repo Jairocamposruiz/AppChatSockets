@@ -8,9 +8,10 @@ import { theme } from '@theme';
 
 interface Props {
   className?: string;
+  isPublic: boolean;
 }
 
-export const SendMessage = ({ className }: Props) => {
+export const SendMessage = ({ className, isPublic }: Props) => {
   const { message, onChange, setFormValues } = useForm({
     message: '',
   });
@@ -26,11 +27,19 @@ export const SendMessage = ({ className }: Props) => {
       message: '',
     });
 
-    socket?.emit('private-message', {
-      from: uid,
-      to: chatState.activeChat?.uid,
-      message,
-    });
+    if(isPublic) {
+      socket?.emit('public-message', {
+        from: uid,
+        chat: chatState.publicActiveChat?.uid,
+        message,
+      });
+    } else {
+      socket?.emit('private-message', {
+        from: uid,
+        to: chatState.activeChat?.uid,
+        message,
+      });
+    }
   };
 
   return (

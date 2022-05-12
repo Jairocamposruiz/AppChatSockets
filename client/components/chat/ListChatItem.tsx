@@ -1,4 +1,5 @@
 import { scrollToBottom } from '@helpers/scroll';
+import { SocketContext } from '@store/Socket';
 import { useContext } from 'react';
 
 import { GetMessagesResponse } from '@interfaces/responses';
@@ -11,19 +12,27 @@ import { theme } from '@theme';
 interface Props {
   className?: string;
   chat: Chat;
+  isPublic: boolean;
 }
 
-export const ListChatItem = ({ className, chat }: Props) => {
+export const ListChatItem = ({ className, chat, isPublic }: Props) => {
   const { name, uid, online } = chat;
-  const { activeChat, chatState, addMessages } = useContext(ChatContext);
+  const { activeChat, activePublicChat, chatState, addMessages, addPublicMessages } = useContext(ChatContext);
+  const { socket } = useContext(SocketContext);
 
   const onClick = async () => {
-    activeChat(chat);
-
-    const resp = await fetchWithToken<GetMessagesResponse>(`messages/${ uid }`, {}, 'GET');
-    if (!resp?.ok) return;
-
-    addMessages(resp.messages);
+    if (isPublic) {
+      activePublicChat(chat);
+      socket?.emit('join-chat', chat.uid);
+      const resp = await fetchWithToken<GetMessagesResponse>(`public_messages/${ uid }`, {}, 'GET');
+      if (!resp?.ok) return;
+      addPublicMessages(resp.messages);
+    } else {
+      activeChat(chat);
+      const resp = await fetchWithToken<GetMessagesResponse>(`messages/${ uid }`, {}, 'GET');
+      if (!resp?.ok) return;
+      addMessages(resp.messages);
+    }
 
     setTimeout(() => scrollToBottom('messages'), 0);
   };
@@ -31,16 +40,16 @@ export const ListChatItem = ({ className, chat }: Props) => {
   return (
     <div
       onClick={ onClick }
-      className={ `h-24 border-t-2 p-2 cursor-pointer flex ${theme.borderColor} ${ (chatState.activeChat?.uid === uid) ? theme.chatListItemActive : theme.chatListItem } ${ className }` }
+      className={ `h-24 border-t-2 p-2 cursor-pointer flex ${ theme.borderColor } ${ (chatState.activeChat?.uid === uid) ? theme.chatListItemActive : theme.chatListItem } ${ className }` }
     >
       <Icon
-        className={ `h-full ${theme.chatItemIcon}` }
+        className={ `h-full ${ theme.chatItemIcon }` }
         icon={ 'user' }
       />
 
       <div className={ `flex-1 ml-4` }>
         <p
-          className={ `text-xl font-medium ${theme.textColor}` }
+          className={ `text-xl font-medium ${ theme.textColor }` }
         >
           { name }
         </p>

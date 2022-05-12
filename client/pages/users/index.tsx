@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
 
 import { Chat } from '@components/chat/Chat';
 import { ChatUnselect } from '@components/chat/ChatUnselect';
@@ -10,11 +11,19 @@ import { AuthContext } from '@store/Auth';
 import { ChatContext } from '@store/Chat';
 
 const UsersPage: NextPage = () => {
+  const router = useRouter();
   const { chatState } = useContext(ChatContext);
-  const { uid } = useContext(AuthContext);
+  const { uid, logged } = useContext(AuthContext);
   const users = chatState.users.filter((user) => {
     return user.uid !== uid;
   })
+
+  useEffect(() => {
+    if(!logged) {
+      router.push('/auth/login')
+    }
+  }, [logged])
+
 
   return (
     <div>

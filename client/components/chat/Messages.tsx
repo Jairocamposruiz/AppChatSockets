@@ -7,11 +7,14 @@ import { ChatContext } from '@store/Chat';
 
 interface Props {
   className?: string;
+  isPublic: boolean;
 }
 
-export const Messages = ({ className }: Props) => {
+export const Messages = ({ className, isPublic }: Props) => {
   const { chatState } = useContext(ChatContext);
   const { uid } = useContext(AuthContext);
+
+  const messagesToShow = (isPublic) ? chatState.publicMessages : chatState.messages;
 
   return (
     <div
@@ -19,7 +22,7 @@ export const Messages = ({ className }: Props) => {
       className={ `p-4 flex flex-col gap-4 overflow-y-scroll pb-40 ${ className }` }
     >
       {
-        chatState.messages.map((msg) => (
+        messagesToShow.map((msg) => (
           (msg.from === uid)
             ? (<OutgoingMessage
               key={ msg._id }

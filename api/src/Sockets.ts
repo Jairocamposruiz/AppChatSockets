@@ -1,4 +1,6 @@
 import { Server } from 'socket.io';
+import { createChat, getChats } from './services/chats';
+import { savePublicMessage } from './services/publicMessages';
 import { connectUser, disconnectUser, getUsers } from './services/users';
 import { saveMessage } from './services/messages';
 import { verifyJWT } from './helpers/jwt';
@@ -14,6 +16,8 @@ class Sockets {
 
   socketEvents() {
     this.io.on('connection', async (socket) => {
+      //Connect
+
       const token = socket.handshake.query['x-token'];
 
       if (!token || typeof token === 'object') {
@@ -41,12 +45,38 @@ class Sockets {
 
       socket.join(id);
 
+      //Private Chats
+
       socket.on('private-message', async (payload) => {
         const message = await saveMessage(payload);
         if (!message) return;
         this.io.to(payload.to).emit('private-message', message);
         this.io.to(payload.from).emit('private-message', message);
       });
+
+      //Public Chats
+
+      this.io.emit('chats-list', await getChats());
+
+      socket.on('create-chat', async (payload) => {
+        console.log(payload)
+        const chat = await createChat(payload);
+        if (!chat) return;
+        this.io.emit('chats-list', await getChats());
+      });
+
+      socket.on('join-chat', async (payload) => {
+        console.log("sala:" + payload)
+        socket.join(payload);
+      });
+
+      socket.on('public-message', async (payload) => {
+        const message = await savePublicMessage(payload);
+        if (!message) return;
+        this.io.to(payload.chat).emit('public-message', message);
+      });
+
+      //Disconnect
 
       socket.on('disconnect', async () => {
         await disconnectUser(id);

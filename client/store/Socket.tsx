@@ -27,7 +27,7 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
 
   const { socket, online, connectSocket, disconnectSocket } = useSocket(socketUrl);
   const { logged } = useContext(AuthContext);
-  const { loadUsers, newMessage } = useContext(ChatContext);
+  const { loadUsers, loadChats, newMessage, newPublicMessage } = useContext(ChatContext);
 
   useEffect(() => {
     if (logged) {
@@ -48,12 +48,30 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
   }, [socket]);
 
   useEffect(() => {
+    socket?.on('chats-list', (chats) => {
+      loadChats(chats);
+    });
+  }, [socket]);
+
+  useEffect(() => {
     socket?.on('private-message', (message) => {
       newMessage(message);
-
       scrollToBottomAnimated('messages');
     });
   }, [socket, newMessage]);
+
+  useEffect(() => {
+    socket?.on('public-message', (message) => {
+      const { _id, chat, ...rest } = message;
+      const parseMessage = {
+        ...rest,
+        uid: _id,
+        to: chat,
+      };
+      newPublicMessage(parseMessage);
+      scrollToBottomAnimated('messages');
+    });
+  }, [socket, newPublicMessage]);
 
   return (
     <SocketContext.Provider value={ { socket, online } }>

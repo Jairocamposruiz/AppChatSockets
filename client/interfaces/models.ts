@@ -18,4 +18,5 @@ export interface Chat {
   name: string;
   uid: string;
   online: boolean;
+  icon?: string;
 }

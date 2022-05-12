@@ -20,6 +20,10 @@ export const useForm = <T extends { [key: string]: any }>(initialState: T) => {
     }));
   };
 
+  const clear = () => {
+    setForm(initialState);
+  }
+
   const setFormValues = useCallback((newValues: T) => {
     setForm(newValues);
   }, []);
@@ -28,6 +32,7 @@ export const useForm = <T extends { [key: string]: any }>(initialState: T) => {
     ...form,
     form,
     onChange,
+    clear,
     setFormValues,
     onChangeWithParams,
   };

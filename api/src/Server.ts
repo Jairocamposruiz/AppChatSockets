@@ -9,6 +9,7 @@ import { dbConnection } from './database/config';
 import Sockets from './Sockets';
 import authController from './controllers/auth';
 import messagesController from './controllers/messages';
+import publicMessagesController from './controllers/publicMessages';
 
 class Server {
   app: Express;
@@ -46,6 +47,7 @@ class Server {
   private routes() {
     this.app.use('/api/v1/auth', authController);
     this.app.use('/api/v1/messages', messagesController);
+    this.app.use('/api/v1/public_messages', publicMessagesController)
   }
 
   public listen() {
