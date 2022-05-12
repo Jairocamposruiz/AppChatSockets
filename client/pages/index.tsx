@@ -1,3 +1,4 @@
+import { Container } from '@components/layout/Container';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -10,11 +11,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="text-3xl font-bold underline">
-          Hello world!
-        </h1>
-      </main>
+      <Container>
+        <h1>Home</h1>
+      </Container>
     </div>
   );
 };

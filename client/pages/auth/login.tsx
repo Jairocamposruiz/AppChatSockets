@@ -41,8 +41,10 @@ const LoginPage: NextPage = () => {
         <meta name="description" content="Descripción de la página" />
       </Head>
 
-      <Container>
-        <div className={ `p-8 rounded-lg ${ theme.bgCard }` }>
+      <Container
+        center
+      >
+        <div className={ `p-8 rounded-lg w-80 ${ theme.bgCard }` }>
           <form
             onSubmit={ onSubmit }
             className={ `flex flex-col gap-2` }

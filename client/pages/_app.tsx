@@ -1,3 +1,4 @@
+import { UIProvider } from '@store/UI';
 import type { AppProps, NextWebVitalsMetric } from 'next/app';
 
 import '../styles/globals.css';
@@ -16,9 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChatProvider>
       <AuthProvider>
         <SocketProvider>
-          <Layout>
-            <Component { ...pageProps } />
-          </Layout>
+          <UIProvider>
+            <Layout>
+              <Component { ...pageProps } />
+            </Layout>
+          </UIProvider>
         </SocketProvider>
       </AuthProvider>
     </ChatProvider>

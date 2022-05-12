@@ -43,7 +43,7 @@ export const InputText = ({
         minLength={ minLength }
         maxLength={ maxLength }
         placeholder={ placeholder }
-        className={ `rounded py-1 px-2 ${ theme.input }` }
+        className={ `rounded py-1 px-2 ${ theme.input } ${theme.textColor}` }
       />
     </div>
   );

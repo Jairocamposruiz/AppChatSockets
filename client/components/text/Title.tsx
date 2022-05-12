@@ -8,7 +8,7 @@ interface Props {
 export const Title = ({ className, label }: Props) => {
   return (
     <div
-      className={ `group cursor-default flex flex-col my-4 mx-4 ${ className }` }
+      className={ `group cursor-default w-fit flex flex-col my-4 mx-4 ${ className }` }
     >
       <div
         className={`h-1 w-10 group-hover:w-full duration-500 self-end ${theme.bgActive}`}

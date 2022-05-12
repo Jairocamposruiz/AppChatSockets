@@ -9,7 +9,7 @@ interface Props {
 export const Footer = ({ className }: Props) => {
   return (
     <footer
-      className={ `px-4 py-8 flex flex-col sm:flex-row sm:items-center justify-around ${ theme.bgFooter } ${ className }` }
+      className={ `px-4 py-8 flex flex-col sm:flex-row sm:items-center justify-around ${ theme.bgFooter }  ${theme.textColor} ${ className }` }
     >
       <div className={`sm:w-1/4 mb-4 sm:mb-0`}>
         <p

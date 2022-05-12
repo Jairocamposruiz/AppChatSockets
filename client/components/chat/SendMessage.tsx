@@ -36,14 +36,14 @@ export const SendMessage = ({ className }: Props) => {
   return (
     <form
       onSubmit={onSubmit}
-      className={ `border-t-4 w-full h-40 p-4 flex gap-2 ${ className }` }
+      className={ `border-t-4 w-full h-40 p-4 flex gap-2 ${theme.borderColor} ${ className }` }
     >
       <textarea
         name={'message'}
         value={message}
         onChange={onChange}
         placeholder={ 'Mensaje...' }
-        className={ `w-full h-full rounded-lg p-2 font-semibold resize-none ${ theme.input }` }
+        className={ `w-full h-full rounded-lg p-2 font-semibold resize-none ${ theme.input } ${theme.textColor}` }
       />
 
       <button

@@ -1,4 +1,5 @@
 import { Chat } from '@interfaces/models';
+import { theme } from '@theme';
 import { useState } from 'react';
 
 import { ButtonOpenClose } from '@components/buttons/ButtonOpenClose';
@@ -18,7 +19,7 @@ export const ListChat = ({ className, title, chats }: Props) => {
   return (
     <>
       <div
-        className={ `h-full sm:w-6/12 md:w-4/12 border-r-2 ${ (isOpen) ? 'flex-col' : 'hidden' } ${ className }` }
+        className={ `h-full sm:w-6/12 md:w-4/12 border-r-2 ${theme.borderColor} ${ (isOpen) ? 'flex-col' : 'hidden' } ${ className }` }
       >
         <div
           className="flex justify-between"

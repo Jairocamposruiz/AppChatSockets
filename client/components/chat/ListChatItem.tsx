@@ -31,21 +31,21 @@ export const ListChatItem = ({ className, chat }: Props) => {
   return (
     <div
       onClick={ onClick }
-      className={ `h-24 border-t-2 p-2 cursor-pointer flex ${ (chatState.activeChat?.uid === uid) ? theme.chatListItemActive : theme.chatListItem } ${ className }` }
+      className={ `h-24 border-t-2 p-2 cursor-pointer flex ${theme.borderColor} ${ (chatState.activeChat?.uid === uid) ? theme.chatListItemActive : theme.chatListItem } ${ className }` }
     >
       <Icon
-        className={ `h-full text-gray-400` }
+        className={ `h-full ${theme.chatItemIcon}` }
         icon={ 'user' }
       />
 
       <div className={ `flex-1 ml-4` }>
         <p
-          className={ `text-xl font-medium text-gray-900` }
+          className={ `text-xl font-medium ${theme.textColor}` }
         >
           { name }
         </p>
         <p
-          className={ `mt-1 ${ online ? 'text-green-500' : 'text-red-500' } text-lg` }
+          className={ `mt-1 ${ online ? 'text-green-500 dark:text-green-300' : 'text-red-500 dark:text-red-400' } text-lg` }
         >
           { online ? 'Online' : 'Offline' }
         </p>

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useRouter } from 'next/router';
 
 import { theme } from '@theme';
 import { Footer } from '@components/footer/Footer';
@@ -10,9 +11,13 @@ interface Props {
 }
 
 export const Layout = ({ className, children }: Props) => {
+  const { pathname } = useRouter();
+
+  const withoutFooter = ['/chats', '/users'];
+
   return (
     <div
-      className={ `flex w-full flex-col min-h-screen max-w-screen overflow-y-hidden justify-between ${theme.bgPage} ${ className }` }
+      className={ `flex w-full flex-col min-h-screen max-w-screen overflow-y-hidden overflow-x-hidden justify-between ${theme.bgPage} ${ className }` }
     >
       <Navbar />
       <div
@@ -20,7 +25,9 @@ export const Layout = ({ className, children }: Props) => {
       >
         { children }
       </div>
-      <Footer />
+      {
+        (!withoutFooter.includes(pathname)) && <Footer />
+      }
     </div>
   );
 };

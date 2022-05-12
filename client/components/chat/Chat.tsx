@@ -1,5 +1,6 @@
 import { Messages } from '@components/chat/Messages';
 import { SendMessage } from '@components/chat/SendMessage';
+import { theme } from '@theme';
 
 interface Props {
   className?: string;
@@ -14,7 +15,7 @@ export const Chat = ({ className, name }: Props) => {
       className={ `flex flex-col flex-1 ${ className }` }
     >
       <h2
-        className="text-2xl sm:text-3xl font-bold my-5 ml-20"
+        className={ `text-2xl sm:text-3xl font-bold my-5 ml-20 ${theme.textColor}` }
       >
         {name}
       </h2>
