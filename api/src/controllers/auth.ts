@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 import { body } from 'express-validator';
 import { generateJWT } from '../helpers/jwt';
 
-import { createUser, login, revalidateToken, existEmail } from '../services/auth';
+import { createUser, login, revalidateToken, existName } from '../services/auth';
 import { validateFields } from '../middlewares/validateFields';
 import { validateJWT } from '../middlewares/validateJWT';
 
@@ -11,23 +11,22 @@ const router = Router();
 //New Users
 router.post('/new', [
   body('name', 'Name is required and need to be more than 2 characters').isString().isLength({ min: 2 }),
-  body('email', 'Email is required').isEmail(),
   body('password', 'Password is required and need to be more than 6 characters').isString().isLength({ min: 6 }),
   validateFields,
 ], async (req: Request, res: Response) => {
-  const { email, password, name } = req.body;
+  const { password, name } = req.body;
 
   try {
-    const emailAlreadyExist = await existEmail(email);
+    const nameAlreadyExist = await existName(name);
 
-    if (emailAlreadyExist) {
+    if (nameAlreadyExist) {
       return res.status(400).json({
         ok: false,
-        msg: 'Email already exist',
+        msg: 'Name already exist',
       });
     }
 
-    const user = await createUser({ email, password, name });
+    const user = await createUser({ password, name });
     const token = await generateJWT({
       id: user.id,
     });
@@ -48,19 +47,19 @@ router.post('/new', [
 
 //Login
 router.post('/login', [
-  body('email', 'Email is required').isEmail(),
+  body('name', 'Name is required').isString(),
   body('password', 'Password is required').isString(),
   validateFields,
 ], async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { name, password } = req.body;
 
   try {
-    const user = await login(email, password);
+    const user = await login(name, password);
 
     if (!user) {
       return res.status(400).json({
         ok: false,
-        msg: 'Email or password incorrect',
+        msg: 'Name or password incorrect',
       });
     }
 

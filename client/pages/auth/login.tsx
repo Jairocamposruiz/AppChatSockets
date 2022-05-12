@@ -2,6 +2,7 @@ import { FormEvent, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import { Button } from '@components/buttons/Button';
 import { InputText } from '@components/input/InputText';
@@ -15,17 +16,17 @@ const LoginPage: NextPage = () => {
   const { login, logged } = useContext(AuthContext);
   const router = useRouter();
 
-  const { onChange, email, password } = useForm({
-    email: '',
+  const { onChange, name, password } = useForm({
+    name: '',
     password: '',
   });
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (email.length < 3) return;
+    if (name.length < 3) return;
     if (password.length < 6) return;
 
-    login(email, password);
+    login(name, password);
   };
 
   useEffect(() => {
@@ -51,17 +52,15 @@ const LoginPage: NextPage = () => {
           >
             <Title label={ 'Iniciar sesión' } />
             <InputText
-              label={ 'Email:' }
-              placeholder={ 'example@gmail.com' }
+              label={ 'Nombre:' }
               onChange={ onChange }
-              value={ email }
-              name={ 'email' }
-              type={ 'email' }
+              value={ name }
+              name={ 'name' }
+              type={ 'text' }
               minLength={ 3 }
             />
             <InputText
               label={ 'Password:' }
-              placeholder={ '******' }
               onChange={ onChange }
               name={ 'password' }
               value={ password }
@@ -70,10 +69,17 @@ const LoginPage: NextPage = () => {
             />
             <Button
               className={ `mt-4` }
-              typeStyle={ 'primary' }
               text={ 'Iniciar Sesión' }
               type={ 'submit' }
             />
+
+            <Link
+              href={'/auth/register'}
+            >
+              <a className={`mt-2 ${theme.textColorActive}`}>
+                Registrase
+              </a>
+            </Link>
           </form>
         </div>
       </Container>

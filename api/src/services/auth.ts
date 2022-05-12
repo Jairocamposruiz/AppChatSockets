@@ -7,30 +7,33 @@ export const existEmail = async (email: string): Promise<Boolean> => {
   return !!userByEmail;
 };
 
+export const existName = async (name: string): Promise<Boolean> => {
+  const userByName = await User.findOne({ name });
+  return !!userByName;
+}
+
 export const createUser = async ({
-  email,
   password,
   name,
-}: { email: string, password: string, name: string }) => {
+}: { password: string, name: string }) => {
   const passwordEncrypted = encryptPassword(password);
   const newUser = new User({
-    email,
     password: passwordEncrypted,
-    name,
+    name: name,
   });
   await newUser.save();
 
   return newUser;
 };
 
-export const login = async (email: string, password: string) => {
-  const userByEmail = await User.findOne({ email });
-  if (!userByEmail) return null;
+export const login = async (name: string, password: string) => {
+  const userByName = await User.findOne({ name: name });
+  if (!userByName) return null;
 
-  const isPasswordValid = verifyPassword(userByEmail.password, password);
+  const isPasswordValid = verifyPassword(userByName.password, password);
   if (!isPasswordValid) return null;
 
-  return userByEmail;
+  return userByName;
 };
 
 export const revalidateToken = async (payloadToken: any) => {
