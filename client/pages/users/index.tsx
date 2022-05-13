@@ -16,14 +16,13 @@ const UsersPage: NextPage = () => {
   const { uid, logged } = useContext(AuthContext);
   const users = chatState.users.filter((user) => {
     return user.uid !== uid;
-  })
+  });
 
   useEffect(() => {
-    if(!logged) {
-      router.push('/auth/login')
+    if (!logged) {
+      router.push('/auth/login');
     }
-  }, [logged])
-
+  }, [logged, router]);
 
   return (
     <div>
@@ -33,7 +32,7 @@ const UsersPage: NextPage = () => {
       </Head>
 
       <ContainerScreen>
-        <ListChat title={'Chats privados'} chats={users} />
+        <ListChat title={ 'Chats privados' } chats={ users } />
 
         { (chatState.activeChat)
           ? <Chat name={ chatState.activeChat.name } />

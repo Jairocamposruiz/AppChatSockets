@@ -20,7 +20,7 @@ const RegisterPage: NextPage = () => {
   const { onChange, name, password1, password2 } = useForm({
     name: '',
     password1: '',
-    password2: ''
+    password2: '',
   });
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -34,10 +34,10 @@ const RegisterPage: NextPage = () => {
   };
 
   useEffect(() => {
-    if(logged) {
+    if (logged) {
       router.push('/');
     }
-  }, [logged])
+  }, [logged, router]);
 
   return (
     <div>
@@ -85,9 +85,9 @@ const RegisterPage: NextPage = () => {
               type={ 'submit' }
             />
             <Link
-              href={'/auth/login'}
+              href={ '/auth/login' }
             >
-              <a className={`mt-2 ${theme.textColorActive}`}>
+              <a className={ `mt-2 ${ theme.textColorActive }` }>
                 Login
               </a>
             </Link>
@@ -95,7 +95,7 @@ const RegisterPage: NextPage = () => {
         </div>
       </Container>
     </div>
-  )
+  );
 };
 
 export default RegisterPage;

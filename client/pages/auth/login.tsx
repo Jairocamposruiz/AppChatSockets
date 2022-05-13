@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useEffect } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -32,10 +32,10 @@ const LoginPage: NextPage = () => {
   };
 
   useEffect(() => {
-    if(logged) {
+    if (logged) {
       router.push('/');
     }
-  }, [logged])
+  }, [logged, router]);
 
   return (
     <div>
@@ -76,9 +76,9 @@ const LoginPage: NextPage = () => {
             />
 
             <Link
-              href={'/auth/register'}
+              href={ '/auth/register' }
             >
-              <a className={`mt-2 ${theme.textColorActive}`}>
+              <a className={ `mt-2 ${ theme.textColorActive }` }>
                 Registrase
               </a>
             </Link>

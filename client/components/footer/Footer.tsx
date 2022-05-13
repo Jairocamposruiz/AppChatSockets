@@ -25,6 +25,7 @@ export const Footer = ({ className }: Props) => {
         <a
           href="https://blog.jcoder.es"
           target="_blank"
+          rel="noopener noreferrer"
           className={ `text-blue-500` }
         >JCodeR.es</a>
       </div>
@@ -36,6 +37,7 @@ export const Footer = ({ className }: Props) => {
           <a
             href="https://blog.jcoder.es"
             target="_blank"
+            rel="noopener noreferrer"
             className={ `text-blue-500` }
           >JCodeR.es</a>
         </p>
@@ -43,6 +45,7 @@ export const Footer = ({ className }: Props) => {
           <a
             href="https://github.com/Jairocamposruiz/AppChatSockets.git"
             target="_blank"
+            rel="noopener noreferrer"
             className={ `text-blue-500` }
           >Repositorio en GitHub</a>
         </p>
@@ -50,6 +53,7 @@ export const Footer = ({ className }: Props) => {
           <a
             href="https://blog.jcoder.es"
             target="_blank"
+            rel="noopener noreferrer"
             className={ `text-blue-500` }
           >Descripción del proyecto</a>
         </p>

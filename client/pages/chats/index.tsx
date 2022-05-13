@@ -18,10 +18,10 @@ const ChatsPage: NextPage = () => {
   const chats = chatState.chats;
 
   useEffect(() => {
-    if(!logged) {
-      router.push('/auth/login')
+    if (!logged) {
+      router.push('/auth/login');
     }
-  }, [logged])
+  }, [logged, router]);
 
   return (
     <div>

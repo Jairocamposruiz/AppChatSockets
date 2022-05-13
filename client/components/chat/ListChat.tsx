@@ -70,6 +70,7 @@ export const ListChat = ({ className, title, chats, isPublic = false }: Props) =
           >
             <InputText
               onChange={ onChange }
+              placeholder={ 'Nombre del nuevo chat público' }
               className={ 'mx-2' }
               name={ 'name' }
               value={ name }
