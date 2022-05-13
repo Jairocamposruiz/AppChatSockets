@@ -11,6 +11,7 @@ import { Container } from '@components/layout/Container';
 import { theme } from '@theme';
 import { useForm } from '@hooks/useForm';
 import { AuthContext } from '@store/Auth';
+import { alertError } from '@helpers/alert';
 
 const LoginPage: NextPage = () => {
   const { login, logged } = useContext(AuthContext);
@@ -21,12 +22,13 @@ const LoginPage: NextPage = () => {
     password: '',
   });
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (name.length < 3) return;
-    if (password.length < 6) return;
+    if (name.length < 3) return alertError('Error en el formulario', 'El nombre de usuario debe tener al menos 3 caracteres');
+    if (password.length < 6) return alertError('Error en el formulario', 'La contraseña debe tener al menos 6 caracteres');
 
-    login(name, password);
+    const isCorrect = await login(name, password);
+    if (!isCorrect) return alertError('Error en el formulario', 'El nombre de usuario o la contraseña son incorrectos');
   };
 
   useEffect(() => {

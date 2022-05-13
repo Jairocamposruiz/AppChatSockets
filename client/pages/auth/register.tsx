@@ -11,6 +11,7 @@ import { Title } from '@components/text/Title';
 import { useForm } from '@hooks/useForm';
 import { AuthContext } from '@store/Auth';
 import { theme } from '@theme';
+import { alertError } from '@helpers/alert';
 
 const RegisterPage: NextPage = () => {
   const { register, logged } = useContext(AuthContext);
@@ -22,14 +23,14 @@ const RegisterPage: NextPage = () => {
     password2: ''
   });
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (name.length < 3) return;
-    if (password1.length < 6) return;
-    if (password2.length < 6) return;
-    if (password1 !== password2) return;
+    if (name.length < 3) return alertError('Error en el formulario', 'El nombre de usuario debe tener al menos 3 caracteres');
+    if (password1.length < 6 || password2.length < 6) return alertError('Error en el formulario', 'La contraseña debe tener al menos 6 caracteres');
+    if (password1 !== password2) return alertError('Error en el formulario', 'Las contraseñas no coinciden');
 
-    register(name, password1);
+    const isCorrect = await register(name, password1);
+    if (!isCorrect) return alertError('Error en el formulario', 'El nombre de usuario ya existe, pruebe con otro');
   };
 
   useEffect(() => {

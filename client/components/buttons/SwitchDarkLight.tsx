@@ -9,7 +9,7 @@ export interface Props {
 
 const light = {
   type: 'light',
-  colorBack: 'bg-gray-800',
+  colorBack: 'bg-slate-800',
   colorFront: 'bg-blue-600',
   colorIcon: 'text-yellow-400',
   position: 'left-0',
@@ -53,8 +53,8 @@ export const SwitchDarkLight = ({ className }: Props) => {
         <div
           className={ `${ stateSwitch.colorFront } ${ stateSwitch.position } w-6 h-6 rounded-full absolute transition z-10` }
         />
-        <Icon icon={ 'moon' } className={ `${ stateSwitch.colorIcon } w-5 absolute left-0.5 top-1` } />
-        <Icon icon={ 'sun' } className={ `${ stateSwitch.colorIcon } w-5 absolute right-0.5 top-1` } />
+        <Icon icon={ 'moon' } className={ `${ stateSwitch.colorIcon } w-5 absolute left-0.5 top-0.5` } />
+        <Icon icon={ 'sun' } className={ `${ stateSwitch.colorIcon } w-5 absolute right-0.5 top-0.5` } />
       </div>
     </div>
   );
