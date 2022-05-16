@@ -8,7 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const envFound = dotenv_1.default.config();
 if (envFound.error) {
-    throw new Error('⚠️  No se pudo encontrar el archivo .env  ⚠️');
+    console.warn('⚠️  No se pudo encontrar el archivo .env  ⚠️');
 }
 exports.config = {
     app: {
