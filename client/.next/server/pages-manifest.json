@@ -1,0 +1,12 @@
+{
+  "/_app": "pages/_app.js",
+  "/404": "pages/404.html",
+  "/auth/login": "pages/auth/login.html",
+  "/settings": "pages/settings.html",
+  "/auth/register": "pages/auth/register.html",
+  "/": "pages/index.html",
+  "/users": "pages/users.html",
+  "/chats": "pages/chats.html",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js"
+}

@@ -142,7 +142,6 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   };
 
   const newMessage = useCallback((message: Message) => {
-    console.log('asdfasdfasdfasdfasdf')
     dispatch({ type: 'new-message', payload: message });
   }, []);
 

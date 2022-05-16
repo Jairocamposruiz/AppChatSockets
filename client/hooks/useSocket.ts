@@ -17,13 +17,15 @@ export const useSocket = (serverPath: string) => {
     const socketTemp: Socket = io(serverPath, {
       transports: ['websocket'],
       autoConnect: true, //para que se mantenga conectado
-      forceNew: true, //para forzar a que siempre que se llame cree una nueva conexion
+      forceNew: true, //para forzar a que siempre que se llame cree una nueva conexión
       query: {
         'x-token': token,
       },
     });
     setSocket(socketTemp);
   }, [serverPath]);
+
+  console.log(socket)
 
   const disconnectSocket = useCallback(() => {
     socket?.disconnect();

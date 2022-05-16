@@ -6,9 +6,9 @@ COPY . /app
 
 RUN npm install
 
-ENV NEXT_PUBLIC_API_URL=http://localhost:4000/api/v1
+ENV NEXT_PUBLIC_API_URL=https://www.chat.jcoder.es/api/v1
 
-ENV NEXT_PUBLIC_SOCKET_URL=http://localhost:4000
+ENV NEXT_PUBLIC_SOCKET_URL=https://www.chat.jcoder.es
 
 RUN npm run build
 

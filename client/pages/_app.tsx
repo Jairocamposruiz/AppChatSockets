@@ -8,7 +8,7 @@ import { ChatProvider } from '@store/Chat';
 import { SocketProvider } from '@store/Socket';
 
 export const reportWebVitals = (metric: NextWebVitalsMetric) => {
-  console.log(metric);
+  // console.log(metric);
   //Report to analytics
 };
 

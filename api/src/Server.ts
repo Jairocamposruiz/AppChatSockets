@@ -28,7 +28,9 @@ class Server {
 
     //SocketIO
     this.httpServer = createServer(this.app);
-    this.io = new SocketServer(this.httpServer);
+    this.io = new SocketServer(this.httpServer, {
+      path: '/socket.io'
+    });
     this.sockets = new Sockets(this.io);
 
     //Middlewares
@@ -39,7 +41,6 @@ class Server {
   }
 
   private middlewares() {
-    this.app.use(express.static(path.resolve(__dirname, '../../public')));
     this.app.use(cors());
     this.app.use(express.json());
   }
