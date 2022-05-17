@@ -20,46 +20,76 @@ services:
   nginx:
     container_name: nginx
     build: ./nginx
-    ports:
+    expose:
       - "80"
     links:
       - expressapp
       - reactapp
       - nginx-proxy
-      - letsencrypt
+#      - letsencrypt
     environment:
       - VIRTUAL_HOST=chat.jcoder.es,www.chat.jcoder.es
-      - LETSENCRYPT_HOST=chat.jcoder.es,www.chat.jcoder.es
+#      - LETSENCRYPT_HOST=chat.jcoder.es,www.chat.jcoder.es
     restart: always
 
+#  nginx-proxy:
+#    container_name: nginx-proxy
+#    image: jwilder/nginx-proxy
+#    restart: always
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - /var/run/docker.sock:/tmp/docker.sock:ro
+#      - certs:/etc/nginx/certs:ro
+#      - vhostd:/etc/nginx/vhost.d
+#      - html:/usr/share/nginx/html
+#    labels:
+#      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+#  letsencrypt:
+#    container_name: letsencrypt
+#    image: jrcs/letsencrypt-nginx-proxy-companion
+#    restart: always
+#    environment:
+#      - NGINX_PROXY_CONTAINER=nginx-proxy
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - certs:/etc/nginx/certs:rw
+#      - vhostd:/etc/nginx/vhost.d
+#      - html:/usr/share/nginx/html
+
   nginx-proxy:
+    image: nginxproxy/nginx-proxy
     container_name: nginx-proxy
-    image: jwilder/nginx-proxy
-    restart: always
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - certs:/etc/nginx/certs:ro
-      - vhostd:/etc/nginx/vhost.d
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-    labels:
-      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    network_mode: bridge
 
-  letsencrypt:
-    container_name: letsencrypt
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    restart: always
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
     environment:
-      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=mail@yourdomain.tld
     volumes:
-      - certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - vhostd:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
+    network_mode: bridge
 
 volumes:
   certs:
   html:
   vhostd:
+  conf:
+  acme:
