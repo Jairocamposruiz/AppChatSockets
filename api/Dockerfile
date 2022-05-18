@@ -8,7 +8,7 @@ RUN npm install
 
 ENV PORT=4000
 
-ENV CONNECTION_DB=mongoUrl
+ENV CONNECTION_DB=mongodb
 
 ENV SECRET_JWT=secret
 
