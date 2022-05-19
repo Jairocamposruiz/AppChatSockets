@@ -1,12 +1,12 @@
 {
+  "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/404": "pages/404.html",
   "/auth/login": "pages/auth/login.html",
   "/auth/register": "pages/auth/register.html",
   "/chats": "pages/chats.html",
-  "/": "pages/index.html",
   "/settings": "pages/settings.html",
   "/users": "pages/users.html",
-  "/_app": "pages/_app.js",
+  "/": "pages/index.html",
   "/_document": "pages/_document.js"
 }

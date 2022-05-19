@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useSocket = (serverPath: string) => {
   //Si lo pongo asi es para conectar automaticamente cuando entramos a la app sin necesidad de llamar a una funcion y setearlo en el state
@@ -22,10 +22,9 @@ export const useSocket = (serverPath: string) => {
         'x-token': token,
       },
     });
+
     setSocket(socketTemp);
   }, [serverPath]);
-
-  console.log(socket)
 
   const disconnectSocket = useCallback(() => {
     socket?.disconnect();

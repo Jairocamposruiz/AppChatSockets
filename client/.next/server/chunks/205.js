@@ -104,7 +104,6 @@ const useSocket = (serverPath)=>{
     }, [
         serverPath
     ]);
-    console.log(socket);
     const disconnectSocket = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(()=>{
         socket?.disconnect();
     }, [

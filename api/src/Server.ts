@@ -26,15 +26,15 @@ class Server {
     //Connection DB
     dbConnection();
 
+    //Middlewares
+    this.middlewares();
+
     //SocketIO
     this.httpServer = createServer(this.app);
     this.io = new SocketServer(this.httpServer, {
-      path: '/socket.io'
+      path: '/socket.io',
     });
     this.sockets = new Sockets(this.io);
-
-    //Middlewares
-    this.middlewares();
 
     //Routes
     this.routes();
@@ -48,7 +48,7 @@ class Server {
   private routes() {
     this.app.use('/api/v1/auth', authController);
     this.app.use('/api/v1/messages', messagesController);
-    this.app.use('/api/v1/public_messages', publicMessagesController)
+    this.app.use('/api/v1/public_messages', publicMessagesController);
   }
 
   public listen() {

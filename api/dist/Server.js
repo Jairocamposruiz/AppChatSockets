@@ -20,14 +20,14 @@ class Server {
         this.port = config_1.config.app.port;
         //Connection DB
         (0, config_2.dbConnection)();
+        //Middlewares
+        this.middlewares();
         //SocketIO
         this.httpServer = (0, http_1.createServer)(this.app);
         this.io = new socket_io_1.Server(this.httpServer, {
-            path: '/socket.io'
+            path: '/socket.io',
         });
         this.sockets = new Sockets_1.default(this.io);
-        //Middlewares
-        this.middlewares();
         //Routes
         this.routes();
     }
