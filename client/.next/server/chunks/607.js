@@ -10,7 +10,7 @@ exports.modules = {
 /* harmony export */   "H": () => (/* binding */ fetchWithToken),
 /* harmony export */   "x": () => (/* binding */ fetchWithoutToken)
 /* harmony export */ });
-const baseUrl = "https://blog.jcoder.es/api/v1";
+const baseUrl = "https://chat.jcoder.es/api/v1";
 if (!baseUrl) {
     throw new Error("\u26A0\uFE0F The variable of environment NEXT_PUBLIC_API_URL is required \u26A0\uFE0F");
 }

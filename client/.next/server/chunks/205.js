@@ -348,7 +348,7 @@ _hooks_useSocket__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.
 
 
 const SocketContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)({});
-const socketUrl = "https://blog.jcoder.es";
+const socketUrl = "https://chat.jcoder.es";
 if (!socketUrl) {
     throw new Error("\u26A0\uFE0F The variable of environment NEXT_PUBLIC_SOCKET_URL is required \u26A0\uFE0F");
 }

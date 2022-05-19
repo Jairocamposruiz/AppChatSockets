@@ -1,12 +1,12 @@
 {
-  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.html",
+  "/auth/login": "pages/auth/login.html",
   "/auth/register": "pages/auth/register.html",
   "/chats": "pages/chats.html",
-  "/404": "pages/404.html",
-  "/settings": "pages/settings.html",
   "/": "pages/index.html",
-  "/auth/login": "pages/auth/login.html",
+  "/settings": "pages/settings.html",
   "/users": "pages/users.html",
-  "/_error": "pages/_error.js",
+  "/_app": "pages/_app.js",
   "/_document": "pages/_document.js"
 }
