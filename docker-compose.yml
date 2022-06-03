@@ -29,14 +29,13 @@ services:
       - nginx-proxy
       - letsencrypt
     environment:
-      - VIRTUAL_PORT=80
       - VIRTUAL_HOST=chat.jcoder.es,www.chat.jcoder.es
       - LETSENCRYPT_HOST=chat.jcoder.es,www.chat.jcoder.es
     restart: always
 
   nginx-proxy:
     container_name: nginx-proxy
-    image: jwilder/nginx-proxy:alpine
+    image: jwilder/nginx-proxy
     restart: always
     ports:
       - "80:80"
@@ -51,7 +50,7 @@ services:
 
   letsencrypt:
     container_name: letsencrypt
-    image: jrcs/letsencrypt-nginx-proxy-companion:2.2
+    image: jrcs/letsencrypt-nginx-proxy-companion
     restart: always
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
