@@ -10,8 +10,8 @@ const NotFoundPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Nombre de la página</title>
-        <meta name="description" content="Descripción de la página" />
+        <title>Página no encontrada | JCodeR</title>
+        <meta name="description" content="Página no encontrada" />
       </Head>
 
       <Container center>

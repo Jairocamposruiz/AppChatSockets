@@ -9,8 +9,8 @@ const SettingsPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Nombre de la página</title>
-        <meta name="description" content="Descripción de la página" />
+        <title>Ajustes | JCodeR</title>
+        <meta name="description" content="Ajustes" />
       </Head>
 
       <Container>

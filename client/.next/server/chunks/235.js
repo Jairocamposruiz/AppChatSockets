@@ -107,16 +107,18 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_input_InputText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8716);
-/* harmony import */ var _hooks_useForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2851);
-/* harmony import */ var _store_Socket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4448);
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8102);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6689);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_buttons_ButtonOpenClose__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9901);
-/* harmony import */ var _components_chat_ListChatItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9381);
-/* harmony import */ var _components_text_Title__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(6948);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_store_Socket__WEBPACK_IMPORTED_MODULE_3__, _components_chat_ListChatItem__WEBPACK_IMPORTED_MODULE_7__]);
-([_store_Socket__WEBPACK_IMPORTED_MODULE_3__, _components_chat_ListChatItem__WEBPACK_IMPORTED_MODULE_7__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/* harmony import */ var _helpers_alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2362);
+/* harmony import */ var _hooks_useForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2851);
+/* harmony import */ var _store_Socket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4448);
+/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8102);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_buttons_ButtonOpenClose__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9901);
+/* harmony import */ var _components_chat_ListChatItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9381);
+/* harmony import */ var _components_text_Title__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(6948);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_store_Socket__WEBPACK_IMPORTED_MODULE_4__, _components_chat_ListChatItem__WEBPACK_IMPORTED_MODULE_8__]);
+([_store_Socket__WEBPACK_IMPORTED_MODULE_4__, _components_chat_ListChatItem__WEBPACK_IMPORTED_MODULE_8__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
@@ -127,35 +129,46 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_sto
 
 
 const ListChat = ({ className , title , chats , isPublic =false  })=>{
-    const { 0: isOpen , 1: setIsOpen  } = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(true);
+    const { 0: isOpen , 1: setIsOpen  } = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(true);
     const handleOpenClose = ()=>setIsOpen(!isOpen)
     ;
-    const { socket  } = (0,react__WEBPACK_IMPORTED_MODULE_5__.useContext)(_store_Socket__WEBPACK_IMPORTED_MODULE_3__/* .SocketContext */ .J);
-    const { name , onChange , clear  } = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_2__/* .useForm */ .c)({
+    const { socket , online  } = (0,react__WEBPACK_IMPORTED_MODULE_6__.useContext)(_store_Socket__WEBPACK_IMPORTED_MODULE_4__/* .SocketContext */ .J);
+    const { name , onChange , clear  } = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_3__/* .useForm */ .c)({
         name: ""
     });
     const onSubmit = (event)=>{
-        if (name.length < 3) return;
         event.preventDefault();
+        if (name.length < 3) return;
+        if (!online) {
+            (0,_helpers_alert__WEBPACK_IMPORTED_MODULE_2__/* .alertError */ .d9)("Error en la conexi\xf3n", "Comprueba tu conexi\xf3n a internet");
+        }
+        const existChat = chats.find((chat)=>chat.name === name
+        );
+        if (existChat) {
+            (0,_helpers_alert__WEBPACK_IMPORTED_MODULE_2__/* .alertError */ .d9)("Error", "Ya existe un chat con ese nombre");
+            clear();
+            return;
+        }
         socket?.emit("create-chat", {
             name,
             icon: "aaa" //TODO: Agregar opcion para cambiar icono
         });
+        (0,_helpers_alert__WEBPACK_IMPORTED_MODULE_2__/* .alertSuccess */ .iB)("La sala de chat se cre\xf3 correctamente");
         clear();
     };
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: `h-full sm:w-6/12 md:w-4/12 border-r-2 ${_theme__WEBPACK_IMPORTED_MODULE_4__/* .theme.borderColor */ .r.borderColor} ${isOpen ? "flex-col" : "hidden"} ${className}`,
+                className: `h-full sm:w-6/12 md:w-4/12 border-r-2 ${_theme__WEBPACK_IMPORTED_MODULE_5__/* .theme.borderColor */ .r.borderColor} ${isOpen ? "flex-col" : "hidden"} ${className}`,
                 children: [
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         className: "flex justify-between",
                         children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_text_Title__WEBPACK_IMPORTED_MODULE_8__/* .Title */ .D, {
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_text_Title__WEBPACK_IMPORTED_MODULE_9__/* .Title */ .D, {
                                 className: "text-center",
                                 label: title
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_buttons_ButtonOpenClose__WEBPACK_IMPORTED_MODULE_6__/* .ButtonOpenClose */ .t, {
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_buttons_ButtonOpenClose__WEBPACK_IMPORTED_MODULE_7__/* .ButtonOpenClose */ .t, {
                                 onClick: handleOpenClose,
                                 isOpen: isOpen
                             })
@@ -164,14 +177,14 @@ const ListChat = ({ className , title , chats , isPublic =false  })=>{
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         className: `h-full overflow-y-scroll pb-40`,
                         children: [
-                            chats.map((chat)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_chat_ListChatItem__WEBPACK_IMPORTED_MODULE_7__/* .ListChatItem */ .a, {
+                            chats.map((chat)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_chat_ListChatItem__WEBPACK_IMPORTED_MODULE_8__/* .ListChatItem */ .a, {
                                     isPublic: isPublic,
                                     chat: chat
                                 }, chat.uid)
                             ),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", {
                                 onSubmit: onSubmit,
-                                className: `place-content-center mt-4 ${isPublic ? "flex flex-col" : "hidden"} ${_theme__WEBPACK_IMPORTED_MODULE_4__/* .theme.bgCard */ .r.bgCard}`,
+                                className: `place-content-center mt-4 ${isPublic ? "flex flex-col" : "hidden"} ${_theme__WEBPACK_IMPORTED_MODULE_5__/* .theme.bgCard */ .r.bgCard}`,
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_input_InputText__WEBPACK_IMPORTED_MODULE_1__/* .InputText */ .o, {
                                         onChange: onChange,
@@ -186,7 +199,7 @@ const ListChat = ({ className , title , chats , isPublic =false  })=>{
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                                         type: "submit",
-                                        className: `w-full text-center p-4 font-bold place-content-center ${_theme__WEBPACK_IMPORTED_MODULE_4__/* .theme.textColor */ .r.textColor} ${_theme__WEBPACK_IMPORTED_MODULE_4__/* .theme.buttonPrimary */ .r.buttonPrimary}`,
+                                        className: `w-full text-center p-4 font-bold place-content-center ${_theme__WEBPACK_IMPORTED_MODULE_5__/* .theme.textColor */ .r.textColor} ${_theme__WEBPACK_IMPORTED_MODULE_5__/* .theme.buttonPrimary */ .r.buttonPrimary}`,
                                         children: "Nuevo Chat"
                                     })
                                 ]
@@ -195,7 +208,7 @@ const ListChat = ({ className , title , chats , isPublic =false  })=>{
                     })
                 ]
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_buttons_ButtonOpenClose__WEBPACK_IMPORTED_MODULE_6__/* .ButtonOpenClose */ .t, {
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_buttons_ButtonOpenClose__WEBPACK_IMPORTED_MODULE_7__/* .ButtonOpenClose */ .t, {
                 className: `h-20 absolute ${isOpen ? "hidden" : "flex"}`,
                 onClick: handleOpenClose,
                 isOpen: isOpen

@@ -27,8 +27,8 @@ const UsersPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Nombre de la página</title>
-        <meta name="description" content="Descripción de la página" />
+        <title>Chats Privados | JCodeR</title>
+        <meta name="description" content="Chatea de forma privada con otros usuarios" />
       </Head>
 
       <ContainerScreen>

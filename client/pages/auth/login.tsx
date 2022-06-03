@@ -40,8 +40,8 @@ const LoginPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Nombre de la página</title>
-        <meta name="description" content="Descripción de la página" />
+        <title>Login | JCodeR</title>
+        <meta name="description" content="Login" />
       </Head>
 
       <Container

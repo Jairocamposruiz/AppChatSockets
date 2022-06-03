@@ -1,4 +1,5 @@
 import { InputText } from '@components/input/InputText';
+import { alertError, alertSuccess } from '@helpers/alert';
 import { useForm } from '@hooks/useForm';
 import { Chat } from '@interfaces/models';
 import { SocketContext } from '@store/Socket';
@@ -19,17 +20,30 @@ interface Props {
 export const ListChat = ({ className, title, chats, isPublic = false }: Props) => {
   const [isOpen, setIsOpen] = useState(true);
   const handleOpenClose = () => setIsOpen(!isOpen);
-  const { socket } = useContext(SocketContext);
+  const { socket, online } = useContext(SocketContext);
   const { name, onChange, clear } = useForm({ name: '' });
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (name.length < 3) return;
 
-    event.preventDefault();
+    if(!online) {
+      alertError('Error en la conexión', 'Comprueba tu conexión a internet');
+    }
+
+    const existChat = chats.find(chat => chat.name === name);
+    if(existChat) {
+      alertError('Error', 'Ya existe un chat con ese nombre');
+      clear();
+      return;
+    }
+
     socket?.emit('create-chat', {
       name,
       icon: 'aaa' //TODO: Agregar opcion para cambiar icono
     });
+
+    alertSuccess('La sala de chat se creó correctamente');
 
     clear();
   };

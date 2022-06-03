@@ -42,8 +42,8 @@ const RegisterPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Nombre de la página</title>
-        <meta name="description" content="Descripción de la página" />
+        <title>Registrarse | JCodeR</title>
+        <meta name="description" content="Crear una nueva cuenta" />
       </Head>
 
       <Container
